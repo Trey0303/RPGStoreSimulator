@@ -16,11 +16,7 @@ namespace RPGStoreSimulator
             //set Gamerunning to equal true
             bool GameRunning = true;
 
-            //add text file for player inventory
-            string filePath = @"C:\Users\treyp\source\repos\RPGStoreSimulator\RPGStoreSimulator\Inventory.txt";
-            //string[] lines = File.ReadAllLines(filePath);
-            List<string> lines = new List<string>();
-            lines = File.ReadAllLines(filePath).ToList();
+            
 
             //game will continue to run until GameRunning turns false
             while (GameRunning)
@@ -37,11 +33,14 @@ namespace RPGStoreSimulator
                 int strToInt = -1;
                 for(int i = 0; i < commandArray.Length; i++)
                 {
+                    //if player input is valid
                     if(playerCommand == commandArray[i])
                     {
+                        //check which command play requested and convert into an int
                         strToInt = numberForm[i];
                     }
                 }
+                //takes converted int and checks what player wants to do it
                 switch (strToInt)
                 {
                     //if player types "quit" game will stop running
@@ -50,12 +49,10 @@ namespace RPGStoreSimulator
                         break;
                     //shows player inventory when asked
                     case 1:
-                        foreach (String line in lines)
-                        {
-                            Console.WriteLine(line);
-                        }
+                        Items.Inventory();
                         break;
                     case 2:
+                        //check shop/store
                         break;
                 }
             }
