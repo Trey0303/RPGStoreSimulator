@@ -1,0 +1,4 @@
+itemtype,weapontype,name,damage,health
+w,m,short sword,10,
+p,,health potion,,10
+w,r,bow,12,
