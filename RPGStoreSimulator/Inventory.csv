@@ -1,4 +1,4 @@
-itemtype,weapontype,name,damage,health
-w,m,short sword,10,
-p,,health potion,,10
-w,r,bow,12,
+itemtype,weapontype,name,damage,health,cost
+w,m,short sword,10,,15
+p,,health potion,,10,9
+w,r,bow,12,,15

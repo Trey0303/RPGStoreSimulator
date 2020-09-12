@@ -6,7 +6,7 @@ namespace RPGStoreSimulator
 {
     class Potions: Items
     {
-        public int heal;
+        
         public string PotionType;
 
         //if potion does not have parameters
@@ -15,14 +15,17 @@ namespace RPGStoreSimulator
             name = "?";
             PotionType = "?";
             heal = 0;
+            cost = 0;
+            
         }
 
         //if potion has paramerters
-        public Potions(string _type,int _potionEffect, string _name)
+        public Potions(string _type,int _potionEffect, string _name, int _cost)
         {
             name = _name;
             PotionType = _type;
             heal = _potionEffect;
+            cost = _cost;
         }
     }
 }

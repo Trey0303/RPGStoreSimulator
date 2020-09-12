@@ -4,18 +4,21 @@ using System.Data;
 using System.IO;
 using CsvHelper;
 using System.Linq;
+using System.Threading;
 
 
 namespace RPGStoreSimulator
 {
     class Program
     {
-
+        
         
         static void Main(string[] args)
         {
+            //storeInventory.LoadStoreItems();
             //add text file for player inventory
-            Items[] myInv = LoadItems(@"C:\Users\treyp\source\repos\RPGStoreSimulator\RPGStoreSimulator\Inventory.csv");
+            Items[] myInv = LoadItems("Inventory.csv");
+            Items[] storeInv = LoadItems("ShopInventory.csv");
             //string filePath = @"C:\Users\treyp\source\repos\RPGStoreSimulator\RPGStoreSimulator\Inventory.txt"; *old way
 
 
@@ -62,7 +65,14 @@ namespace RPGStoreSimulator
                         }
                         break;
                     case 2:
-                        //check shop/store
+                        //check shop/store inventory
+                        Console.WriteLine("Item: " + "                         " + "Damage:" + "  " + "Cost:");
+                        foreach (Items line in storeInv)
+                        {
+                            //prints inventory
+                            Console.WriteLine(line.name + "  " + line.damage + "        " + line.cost);
+                                
+                        }
                         break;
                 }
             }
@@ -95,6 +105,7 @@ namespace RPGStoreSimulator
                     tmpWeapons.name = lineValue[2];
                     //creates weapons weapon type
                     tmpWeapons.weaponType = lineValue[1];
+                    int.TryParse(lineValue[5], out tmpWeapons.cost);
 
                     //if weapon can deal damage
                     if (lineValue[3] != "")
@@ -102,6 +113,7 @@ namespace RPGStoreSimulator
                         //deals weapons assigned damage
                         int.TryParse(lineValue[3], out tmpWeapons.damage);
                     }
+                    
                     tmpArr[i - 1] = tmpWeapons;
                 }
                 else
@@ -111,16 +123,20 @@ namespace RPGStoreSimulator
                     Potions tmpPotion = new Potions();
                     tmpPotion.name = lineValue[2];
                     tmpPotion.PotionType = lineValue[1];
-                    
+                    int.TryParse(lineValue[5], out tmpPotion.cost);
 
                     if (lineValue[4] != "")
                     {
                         int.TryParse(lineValue[4], out tmpPotion.heal);
+                        
                     }
+                    
                     tmpArr[i - 1] = tmpPotion;
                 }
             }
             return tmpArr;
         }
+
+        
     }
 }
