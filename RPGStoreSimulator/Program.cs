@@ -59,7 +59,7 @@ namespace RPGStoreSimulator
                     case 0:
                         gameRunning = false;
                         break;
-                    //shows player inventory when asked
+                    //shows player INVENTORY and balance of coins when asked
                     case 1:
                         //writes out the name of every item in inventory 
                         Console.WriteLine("");
@@ -72,6 +72,7 @@ namespace RPGStoreSimulator
                             Console.WriteLine(String.Format("{0,-20}  {1,20}", line.name, line.damage));
                         }
                         break;
+                        //go to STORE and view items and current amount of coins
                     case 2:
                         //check shop/store inventory
                         inShop = true;
@@ -86,6 +87,7 @@ namespace RPGStoreSimulator
 
                         }
                         break;
+                        //player wants to BUY item
                     case 3:
                         //if player is in store
                         if (inShop)
@@ -124,15 +126,15 @@ namespace RPGStoreSimulator
                                                 writer.Close();
                                                 //update inventory to view newly added item without have to restart game
                                                 myInv = LoadItems("Inventory.csv");
-                                                //CheckAndEdit.AddItem();
-
                                                 //player coins subtracted by item cost
                                                 coins = coins - item.cost;
+                                                //so that it doesnt also get the "You already have this item." prompt
                                                 count++;
                                             }
                                             
                                         }
                                     }
+                                    //if already in player inventory
                                     if (count < myInv.Length)
                                     {
                                         Console.WriteLine("You already have this item.");
@@ -151,6 +153,7 @@ namespace RPGStoreSimulator
                             Console.WriteLine("You are not in the store.");
                         }
                         break;
+                        //player wants to SELL item
                     case 4:
                         //if player is in store
                         if (inShop)
