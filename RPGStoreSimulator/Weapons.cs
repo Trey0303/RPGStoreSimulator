@@ -12,19 +12,21 @@ namespace RPGStoreSimulator
         //if weapon does not have parameters
         public Weapons()
         {
-            this.name = "?";
-            this.weaponType = "?";
-            this.damage = 1;
-            this.cost = 0;
+            itemType = "?";
+            name = "?";
+            weaponType = "?";
+            damage = 1;
+            cost = 0;
         }
 
         //if weapon has paramerters
-        public Weapons(string _name, string _type, int _weapDamage, int _cost)
+        public Weapons(string _itemType, string _name, string _type, int _weapDamage, int _cost)
         {
-            this.name = _name;
+            itemType = _itemType;
+            name = _name;
             this.weaponType = _type;
-            this.damage = _weapDamage;
-            this.cost = _cost;
+            damage = _weapDamage;
+            cost = _cost;
         }
     }
 }

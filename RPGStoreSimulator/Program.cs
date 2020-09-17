@@ -101,6 +101,15 @@ namespace RPGStoreSimulator
                                     //myInv = CheckAndEdit.checkEdit("Inventory.csv");
                                     Console.WriteLine("added new item to player inventory");
                                     Console.WriteLine("");
+
+                                    //add bought item
+                                    StreamWriter writer;
+                                    writer = new StreamWriter("Inventory.csv", true);
+                                    writer.WriteLine(line.itemType + ","+ line.name + "," + line.damage + "," + line.heal + "," + line.cost);
+                                    writer.Close();
+
+                                    //CheckAndEdit.AddItem();
+
                                     //player coins subtracted by item cost
                                     coins = coins - line.cost;
                                 }
@@ -143,6 +152,13 @@ namespace RPGStoreSimulator
                                     //myInv = CheckAndEdit.checkEdit("Inventory.csv");
                                     Console.WriteLine("item sold");
                                     Console.WriteLine("");
+
+                                    //sell item
+                                    //string[] lines = File.ReadAllLines("Inventory.txt");
+
+                                    //lines.RemoveAt[line.name];
+                                    
+
                                     //player coins added by item cost
                                     coins = coins + line.cost;
                                 }
@@ -184,18 +200,21 @@ namespace RPGStoreSimulator
                     //create weapon
                     Weapons tmpWeapons = new Weapons();
                     //creates weapons assigned name
-                    tmpWeapons.name = lineValue[2];
+                    tmpWeapons.name = lineValue[1];
                     //creates weapons weapon type
-                    tmpWeapons.weaponType = lineValue[1];
-                    int.TryParse(lineValue[5], out tmpWeapons.cost);
+                    //tmpWeapons.weaponType = lineValue[1];
+                    //item cost
+                    int.TryParse(lineValue[4], out tmpWeapons.cost);
+
+                    tmpWeapons.itemType = lineValue[0];
 
                     //if weapon can deal damage
-                    if (lineValue[3] != "")
+                    if (lineValue[2] != "")
                     {
                         //deals weapons assigned damage
-                        int.TryParse(lineValue[3], out tmpWeapons.damage);
+                        int.TryParse(lineValue[2], out tmpWeapons.damage);
                     }
-                    
+
                     tmpArr[i - 1] = tmpWeapons;
                 }
                 else
@@ -203,13 +222,15 @@ namespace RPGStoreSimulator
                     //assume potion
                     //create potion
                     Potions tmpPotion = new Potions();
-                    tmpPotion.name = lineValue[2];
-                    tmpPotion.PotionType = lineValue[1];
-                    int.TryParse(lineValue[5], out tmpPotion.cost);
+                    tmpPotion.name = lineValue[1];
+                    //tmpPotion.PotionType = lineValue[1];
+                    int.TryParse(lineValue[4], out tmpPotion.cost);
 
-                    if (lineValue[4] != "")
+                    tmpPotion.itemType = lineValue[0];
+
+                    if (lineValue[3] != "")
                     {
-                        int.TryParse(lineValue[4], out tmpPotion.heal);
+                        int.TryParse(lineValue[3], out tmpPotion.heal);
                         
                     }
                     

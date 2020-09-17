@@ -12,11 +12,12 @@ namespace RPGStoreSimulator
 
         //public string name;
         public string itemType;
+        public string name;
         public int cost;
         public int damage;
         public int heal;
 
-        public string name { get; set; }
+        
 
     }
     
