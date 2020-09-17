@@ -21,11 +21,14 @@ namespace RPGStoreSimulator
             Items[] storeInv = LoadItems("ShopInventory.csv");
             //string filePath = @"C:\Users\treyp\source\repos\RPGStoreSimulator\RPGStoreSimulator\Inventory.txt"; *old way
 
-
+            
             //set Gamerunning to equal true
             bool gameRunning = true;
+            //set inShop to false
+            bool inShop = false;
 
-
+            //start off with a number of coins
+            int coins = 100;
 
             //game will continue to run until GameRunning turns false
             while (gameRunning)
@@ -35,9 +38,9 @@ namespace RPGStoreSimulator
                 //reads what player inputs
                 String playerCommand = Console.ReadLine();
                 //checks to see if player command matches any command on list
-                String[] commandArray = { "quit", "inv", "show inv", "show inventory", "inventory", "store", "shop" };
+                String[] commandArray = { "quit", "inv", "show inv", "show inventory", "inventory", "store", "shop", "buy", "purchase", "sell"};
                 //array used to convert player command into an int
-                int[] numberForm = { 0, 1, 1, 1, 1, 2, 2 };
+                int[] numberForm = { 0, 1, 1, 1, 1, 2, 2, 3, 3, 4 };
 
                 int strToInt = -1;
                 for (int i = 0; i < commandArray.Length; i++)
@@ -59,19 +62,98 @@ namespace RPGStoreSimulator
                     //shows player inventory when asked
                     case 1:
                         //writes out the name of every item in inventory 
+                        Console.WriteLine("");
+                        Console.WriteLine("Coins: " + coins);
+                        Console.WriteLine("");
+                        Console.WriteLine("Item: " + "                              " + "Damage:");
                         foreach (Items line in myInv)
                         {
-                            Console.WriteLine(line.name);
+                            Console.WriteLine(String.Format("{0,-20}  {1,20}", line.name, line.damage));
                         }
                         break;
                     case 2:
                         //check shop/store inventory
-                        Console.WriteLine("Item: " + "                         " + "Damage:" + "  " + "Cost:");
+                        inShop = true;
+                        Console.WriteLine("");
+                        Console.WriteLine("Coins: " + coins);
+                        Console.WriteLine("");
+                        Console.WriteLine("Item: " + "                              " + "Damage:" + "  " + "Cost:");
                         foreach (Items line in storeInv)
                         {
                             //prints inventory
-                            Console.WriteLine(line.name + "  " + line.damage + "        " + line.cost);
-                                
+                            Console.WriteLine(String.Format("{0,-20}  {1,20}  {2,5}", line.name, line.damage, line.cost));
+
+                        }
+                        break;
+                    case 3:
+                        //if player is in store
+                        if (inShop)
+                        {
+                            //buy item from store
+                            Console.WriteLine("");
+                            Console.WriteLine("What would you like to buy?");
+                            String playerBuyRequest = Console.ReadLine();
+                            //check list to see if player input matches an item name in store inventory
+                            foreach (Items line in storeInv)
+                            {
+                                if(playerBuyRequest == line.name)
+                                {
+                                    //myInv = CheckAndEdit.checkEdit("Inventory.csv");
+                                    Console.WriteLine("added new item to player inventory");
+                                    Console.WriteLine("");
+                                    //player coins subtracted by item cost
+                                    coins = coins - line.cost;
+                                }
+
+                            }
+
+                        }
+                        else
+                        {
+                            //if player is not in store
+                            Console.WriteLine("You are not in the store.");
+                        }
+                        break;
+                    case 4:
+                        //if player is in store
+                        if (inShop)
+                        {
+                            //sell item from inventory
+                            Console.WriteLine("");
+                            Console.WriteLine("Select a item to sell");
+
+                            Console.WriteLine("");
+                            Console.WriteLine("Item: " + "                              " + "Damage:" + "  " + "Cost:");
+                            //print player inventory
+                            foreach (Items line in myInv)
+                            {
+                                //prints inventory name, damage, and cost
+                                Console.WriteLine(String.Format("{0,-20}  {1,20}  {2,5}", line.name, line.damage, line.cost));
+                                //Console.WriteLine(line.name + "  " + line.damage + "        " + line.cost);
+
+                            }
+
+                            Console.WriteLine("What would you like to sell?");
+                            String playerSellRequest = Console.ReadLine();
+                            //check list to see if player input matches an item name in player inventory
+                            foreach (Items line in myInv)
+                            {
+                                if (playerSellRequest == line.name)
+                                {
+                                    //myInv = CheckAndEdit.checkEdit("Inventory.csv");
+                                    Console.WriteLine("item sold");
+                                    Console.WriteLine("");
+                                    //player coins added by item cost
+                                    coins = coins + line.cost;
+                                }
+
+                            }
+
+                        }
+                        else
+                        {
+                            //if player is not in store
+                            Console.WriteLine("You are not in the store.");
                         }
                         break;
                 }
