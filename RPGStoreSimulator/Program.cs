@@ -103,11 +103,14 @@ namespace RPGStoreSimulator
                                     Console.WriteLine("");
 
                                     //add bought item
-                                    StreamWriter writer;
+                                    StreamWriter writer;//adds to text file inventory
                                     writer = new StreamWriter("Inventory.csv", true);
-                                    writer.WriteLine(line.itemType + ","+ line.name + "," + line.damage + "," + line.heal + "," + line.cost);
+                                    //puts item values in order of text file
+                                    writer.WriteLine(line.itemType + "," + line.name + "," + line.damage + "," + line.heal + "," + line.cost);
+                                    //stops writing in document
                                     writer.Close();
-
+                                    //update inventory to view newly added item without have to restart game
+                                    myInv = LoadItems("Inventory.csv");
                                     //CheckAndEdit.AddItem();
 
                                     //player coins subtracted by item cost
