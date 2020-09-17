@@ -66,6 +66,7 @@ namespace RPGStoreSimulator
                         Console.WriteLine("Coins: " + coins);
                         Console.WriteLine("");
                         Console.WriteLine("Item: " + "                              " + "Damage:");
+                        
                         foreach (Items line in myInv)
                         {
                             Console.WriteLine(String.Format("{0,-20}  {1,20}", line.name, line.damage));
@@ -93,29 +94,53 @@ namespace RPGStoreSimulator
                             Console.WriteLine("");
                             Console.WriteLine("What would you like to buy?");
                             String playerBuyRequest = Console.ReadLine();
+                            int count = 0;
                             //check list to see if player input matches an item name in store inventory
-                            foreach (Items line in storeInv)
+                            foreach (Items item in storeInv)
                             {
-                                if(playerBuyRequest == line.name)
+                                if (playerBuyRequest == item.name)
                                 {
-                                    //myInv = CheckAndEdit.checkEdit("Inventory.csv");
-                                    Console.WriteLine("added new item to player inventory");
-                                    Console.WriteLine("");
+                                    //checks every item in player inventory to see if player already has item
+                                    foreach (Items myItem in myInv)
+                                    {
+                                        //if item player wants is not equal to item in inventory
+                                        if (playerBuyRequest != myItem.name)
+                                        {
+                                            //increase count
+                                            count++;
+                                            //if player does not have item in inventory
+                                            if (count == myInv.Length )
+                                            {
+                                                //myInv = CheckAndEdit.checkEdit("Inventory.csv");
+                                                Console.WriteLine("added new item to player inventory");
+                                                Console.WriteLine("");
 
-                                    //add bought item
-                                    StreamWriter writer;//adds to text file inventory
-                                    writer = new StreamWriter("Inventory.csv", true);
-                                    //puts item values in order of text file
-                                    writer.WriteLine(line.itemType + "," + line.name + "," + line.damage + "," + line.heal + "," + line.cost);
-                                    //stops writing in document
-                                    writer.Close();
-                                    //update inventory to view newly added item without have to restart game
-                                    myInv = LoadItems("Inventory.csv");
-                                    //CheckAndEdit.AddItem();
+                                                //add bought item
+                                                StreamWriter writer;//adds to text file inventory
+                                                writer = new StreamWriter("Inventory.csv", true);
+                                                //puts item values in order of text file
+                                                writer.WriteLine(item.itemType + "," + item.name + "," + item.damage + "," + item.heal + "," + item.cost);
+                                                //stops writing in document
+                                                writer.Close();
+                                                //update inventory to view newly added item without have to restart game
+                                                myInv = LoadItems("Inventory.csv");
+                                                //CheckAndEdit.AddItem();
 
-                                    //player coins subtracted by item cost
-                                    coins = coins - line.cost;
+                                                //player coins subtracted by item cost
+                                                coins = coins - item.cost;
+                                                count++;
+                                            }
+                                            
+                                        }
+                                    }
+                                    if (count < myInv.Length)
+                                    {
+                                        Console.WriteLine("You already have this item.");
+                                    }
+
                                 }
+                                
+                                
 
                             }
 
