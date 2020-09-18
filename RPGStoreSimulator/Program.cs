@@ -29,6 +29,8 @@ namespace RPGStoreSimulator
             bool inShop = false;
             //to know when in player inventory
             bool playerInventory = false;
+            //know if it can be viewed
+            bool inspectedItem = false;
             //start off with a number of coins
             int coins = 100;
 
@@ -291,6 +293,7 @@ namespace RPGStoreSimulator
                     case 5:
                         if (playerInventory)
                         {
+                            
                             //ask player what item they want to inspect
                             Console.WriteLine("");
                             Console.WriteLine("Which item would you like to inspect?");
@@ -299,11 +302,15 @@ namespace RPGStoreSimulator
                             {
                                 if(viewItem == myItem.name)
                                 {
-                                    Console.WriteLine("This is a description of " + myItem.name);
+                                    Console.WriteLine("You have inspected " + myItem.name);
                                 }
                             }
+                            if (inspectedItem == false)
+                            {
+                                Console.WriteLine("Nothing to inspect.");
+                            }
 
-                                
+
                         }
                         else if (inShop)
                         {
@@ -315,9 +322,15 @@ namespace RPGStoreSimulator
                             {
                                 if (viewItem == storeItem.name)
                                 {
-                                    Console.WriteLine("This is a description of " + storeItem.name);
+                                    Console.WriteLine("You have inspected " + storeItem.name);
+                                    inspectedItem = true;
                                 }
                             }
+                            if (inspectedItem == false)
+                            {
+                                Console.WriteLine("Nothing to inspect.");
+                            }
+
                         }
                         else
                         {
