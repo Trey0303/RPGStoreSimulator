@@ -16,9 +16,11 @@ namespace RPGStoreSimulator
             //writer.Close();
         }
 
-        public static void RemoveItem()
-        {
-            
-        }
+        //public Items[] RemoveAt(Items line)
+        //{
+
+        //    //return deleted;
+        //}
+       
     }
 }

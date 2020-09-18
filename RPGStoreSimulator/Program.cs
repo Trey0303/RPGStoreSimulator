@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data;
 using System.IO;
 using CsvHelper;
@@ -34,6 +35,7 @@ namespace RPGStoreSimulator
             while (gameRunning)
             {
                 //ask for player input
+                Console.WriteLine("");
                 Console.WriteLine("what would you like to do?");
                 //reads what player inputs
                 String playerCommand = Console.ReadLine();
@@ -59,6 +61,7 @@ namespace RPGStoreSimulator
                     case 0:
                         gameRunning = false;
                         break;
+
                     //shows player INVENTORY and balance of coins when asked
                     case 1:
                         //writes out the name of every item in inventory 
@@ -87,21 +90,36 @@ namespace RPGStoreSimulator
 
                         }
                         break;
+
                         //player wants to BUY item
                     case 3:
                         //if player is in store
                         if (inShop)
                         {
+                            //shows shop/store inventory
+                            Console.WriteLine("");
+                            Console.WriteLine("Coins: " + coins);
+                            Console.WriteLine("");
+                            Console.WriteLine("Item: " + "                              " + "Damage:" + "  " + "Cost:");
+                            foreach (Items line in storeInv)
+                            {
+                                //prints inventory
+                                Console.WriteLine(String.Format("{0,-20}  {1,20}  {2,5}", line.name, line.damage, line.cost));
+
+                            }
+
                             //buy item from store
                             Console.WriteLine("");
                             Console.WriteLine("What would you like to buy?");
                             String playerBuyRequest = Console.ReadLine();
                             int count = 0;
+                            int thereIsItemCount = 0;
                             //check list to see if player input matches an item name in store inventory
                             foreach (Items item in storeInv)
                             {
                                 if (playerBuyRequest == item.name)
                                 {
+                                    thereIsItemCount++;
                                     //checks every item in player inventory to see if player already has item
                                     foreach (Items myItem in myInv)
                                     {
@@ -114,6 +132,7 @@ namespace RPGStoreSimulator
                                             if (count == myInv.Length )
                                             {
                                                 //myInv = CheckAndEdit.checkEdit("Inventory.csv");
+                                                Console.WriteLine("");
                                                 Console.WriteLine("added new item to player inventory");
                                                 Console.WriteLine("");
 
@@ -128,8 +147,10 @@ namespace RPGStoreSimulator
                                                 myInv = LoadItems("Inventory.csv");
                                                 //player coins subtracted by item cost
                                                 coins = coins - item.cost;
-                                                //so that it doesnt also get the "You already have this item." prompt
+                                                //prevent "You already have this item." prompt
                                                 count++;
+                                                //prevent "Store does not carry this item." prompt
+                                                thereIsItemCount = storeInv.Length;
                                             }
                                             
                                         }
@@ -137,22 +158,34 @@ namespace RPGStoreSimulator
                                     //if already in player inventory
                                     if (count < myInv.Length)
                                     {
+                                        Console.WriteLine("");
                                         Console.WriteLine("You already have this item.");
+                                        Console.WriteLine("");
+                                        //prevent "Store does not carry this item." prompt
+                                        thereIsItemCount = storeInv.Length;
                                     }
 
                                 }
-                                
-                                
 
+                            }
+                            if (thereIsItemCount < storeInv.Length)
+                            {
+                                //if store doesnt not have this item
+                                Console.WriteLine("");
+                                Console.WriteLine("Store does not carry this item.");
+                                Console.WriteLine("");
                             }
 
                         }
                         else
                         {
                             //if player is not in store
+                            Console.WriteLine("");
                             Console.WriteLine("You are not in the store.");
+                            Console.WriteLine("");
                         }
                         break;
+
                         //player wants to SELL item
                     case 4:
                         //if player is in store
@@ -173,28 +206,44 @@ namespace RPGStoreSimulator
 
                             }
 
+                            Console.WriteLine("");
                             Console.WriteLine("What would you like to sell?");
                             String playerSellRequest = Console.ReadLine();
+
+                            int count = 0;
                             //check list to see if player input matches an item name in player inventory
                             foreach (Items line in myInv)
                             {
+                                count++;
                                 if (playerSellRequest == line.name)
                                 {
-                                    //myInv = CheckAndEdit.checkEdit("Inventory.csv");
-                                    Console.WriteLine("item sold");
+                                    Console.WriteLine("");
+                                    Console.WriteLine("Item sold");
                                     Console.WriteLine("");
 
-                                    //sell item
-                                    //string[] lines = File.ReadAllLines("Inventory.txt");
+                                    //sell item player typed and removes from inventory
+                                    var oldInv = File.ReadAllLines("Inventory.csv");
+                                    var newInv = oldInv.Where(line => !line.Contains(playerSellRequest));
+                                    File.WriteAllLines("Inventory.csv", newInv);
 
-                                    //lines.RemoveAt[line.name];
-                                    
+                                    //updates items in inventory
+                                    myInv = LoadItems("Inventory.csv");
+
 
                                     //player coins added by item cost
                                     coins = coins + line.cost;
                                 }
+                                //if player inventory does not have item
+                                else if(count == myInv.Length && playerSellRequest != line.name)
+                                {
+                                    Console.WriteLine("");
+                                    Console.WriteLine("You dont own this item.");
+                                    Console.WriteLine("");
+                                }
+                                
 
                             }
+                            
 
                         }
                         else
@@ -202,6 +251,11 @@ namespace RPGStoreSimulator
                             //if player is not in store
                             Console.WriteLine("You are not in the store.");
                         }
+                        break;
+                    default:
+                        Console.WriteLine("");
+                        Console.WriteLine("Invalid input");
+                        Console.WriteLine("");
                         break;
                 }
             }
