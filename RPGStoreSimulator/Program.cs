@@ -43,9 +43,10 @@ namespace RPGStoreSimulator
                 //reads what player inputs
                 String playerCommand = Console.ReadLine();
                 //checks to see if player command matches any command on list
-                String[] commandArray = { "quit", "inv", "show inv", "show inventory", "inventory", "store", "shop", "buy", "purchase", "sell", "inspect", "view"};
+                String[] commandArray = { "quit", "inv", "show inv", "show inventory", "inventory", "store", "shop", "buy",
+                    "purchase", "sell", "inspect", "view", "add_to_shop"};
                 //array used to convert player command into an int
-                int[] numberForm = { 0, 1, 1, 1, 1, 2, 2, 3, 3, 4, 5, 5 };
+                int[] numberForm = { 0, 1, 1, 1, 1, 2, 2, 3, 3, 4, 5, 5, 6};
 
                 int strToInt = -1;
                 for (int i = 0; i < commandArray.Length; i++)
@@ -207,7 +208,7 @@ namespace RPGStoreSimulator
                                         myInv = LoadItems("Inventory.csv");
                                         //player coins subtracted by item cost
                                         coins = coins - item.cost;
-                                        //prevent "You already have this item." prompt
+                                        
                                         
                                     }
                                 }
@@ -278,11 +279,7 @@ namespace RPGStoreSimulator
                                     Console.WriteLine("You dont own this item.");
                                     Console.WriteLine("");
                                 }
-                                
-
                             }
-                            
-
                         }
                         else
                         {
@@ -290,10 +287,10 @@ namespace RPGStoreSimulator
                             Console.WriteLine("You are not in the store.");
                         }
                         break;
+                        //player wants to INSPECT/VIEW item in shop or inventory
                     case 5:
                         if (playerInventory)
-                        {
-                            
+                        { 
                             //ask player what item they want to inspect
                             Console.WriteLine("");
                             Console.WriteLine("Which item would you like to inspect?");
@@ -309,8 +306,6 @@ namespace RPGStoreSimulator
                             {
                                 Console.WriteLine("Nothing to inspect.");
                             }
-
-
                         }
                         else if (inShop)
                         {
@@ -330,13 +325,48 @@ namespace RPGStoreSimulator
                             {
                                 Console.WriteLine("Nothing to inspect.");
                             }
-
                         }
                         else
                         {
                             Console.WriteLine("Nothing to inspect.");
                         }
                         break;
+                        //player can ADD_TO_SHOP new items
+                    case 6:
+                        //probably will need to use streamWriter to make this happen
+                        //create name
+                        Console.WriteLine("");
+                        Console.WriteLine("name: ");
+                        String createName = Console.ReadLine();
+                        //create item type
+                        Console.WriteLine("item is a weapon or potion w/p: ");
+                        String createType = Console.ReadLine();
+                        //create damage
+                        Console.WriteLine("number of damage: ");
+                        String createDamage = Console.ReadLine();
+                        //create heal
+                        Console.WriteLine("health regain: ");
+                        String createHeal = Console.ReadLine();
+                        //create cost
+                        Console.WriteLine("name your price: ");
+                        String createCost = Console.ReadLine();
+                        //use streamWriter to store player inputs somehow
+                        Console.WriteLine("");
+                        Console.WriteLine("added new item to shop");
+                        Console.WriteLine("");
+
+                        //add created item
+                        StreamWriter writerShop;//adds to text file inventory
+                        writerShop = new StreamWriter("ShopInventory.csv", true);
+                        //puts item values in order of text file
+                        writerShop.WriteLine(createName + "," + createType + "," + createDamage + "," + createHeal + "," + createCost);
+                        //stops writing in document
+                        writerShop.Close();
+                        //reload store inventory
+                        storeInv = LoadItems("ShopInventory.csv");
+                        break;
+
+                        //if not a valid command
                     default:
                         Console.WriteLine("");
                         Console.WriteLine("Invalid input");
@@ -344,7 +374,6 @@ namespace RPGStoreSimulator
                         break;
                 }
             }
-
         }
 
         //loads inventory of items for player to call
