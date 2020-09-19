@@ -333,20 +333,23 @@ namespace RPGStoreSimulator
                         break;
                         //player can ADD_TO_SHOP new items
                     case 6:
-                        //probably will need to use streamWriter to make this happen
                         //create name
                         Console.WriteLine("");
                         Console.WriteLine("name: ");
                         String createName = Console.ReadLine();
+                        //need to have it so that if player enters anything other than w/p item wont be created
                         //create item type
                         Console.WriteLine("item is a weapon or potion w/p: ");
                         String createType = Console.ReadLine();
+                        //probably will need to somehow figure out to turn into int
                         //create damage
                         Console.WriteLine("number of damage: ");
                         String createDamage = Console.ReadLine();
+                        //probably will need to somehow figure out to turn into int
                         //create heal
                         Console.WriteLine("health regain: ");
                         String createHeal = Console.ReadLine();
+                        //probably will need to somehow figure out to turn into int
                         //create cost
                         Console.WriteLine("name your price: ");
                         String createCost = Console.ReadLine();
