@@ -83,7 +83,9 @@ namespace RPGStoreSimulator
                                 }
                                 else
                                 {
+                                    Console.WriteLine("");
                                     Console.WriteLine("Invaild funds");
+                                    Console.WriteLine("");
                                     moreThanZero = true;
                                 }
                             }
@@ -141,7 +143,9 @@ namespace RPGStoreSimulator
                         }
                         else
                         {
+                            Console.WriteLine("");
                             Console.WriteLine("Invaild funds");
+                            Console.WriteLine("");
                         }
                     }
                 }

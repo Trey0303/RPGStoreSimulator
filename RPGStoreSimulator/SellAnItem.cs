@@ -60,52 +60,6 @@ namespace RPGStoreSimulator
                 }
             }
             return coins;
-
         }
-
-        //old way
-        //foreach (Items line in myInv)
-        //{
-        //    //prints inventory name, damage, and cost
-        //    Console.WriteLine(String.Format("{0,-20}  {1,20}  {2,5}", line.name, line.damage, line.cost));
-        //    //Console.WriteLine(line.name + "  " + line.damage + "        " + line.cost);
-
-        //}
-
-        //Console.WriteLine("");
-        //Console.WriteLine("What would you like to sell?");
-        //String playerSellRequest = Console.ReadLine();
-
-        //int count = 0;
-        ////check list to see if player input matches an item name in player inventory
-        //foreach (Items line in myInv)
-        //{
-        //    count++;
-        //    if (playerSellRequest == line.name)
-        //    {
-        //        Console.WriteLine("");
-        //        Console.WriteLine("Item sold");
-        //        Console.WriteLine("");
-
-        //        //sell item player typed and removes from inventory
-        //        var oldInv = File.ReadAllLines("Inventory.csv");
-        //        var newInv = oldInv.Where(line => !line.Contains(playerSellRequest));
-        //        File.WriteAllLines("Inventory.csv", newInv);
-
-        //        //updates items in inventory
-        //        myInv = LoadItems("Inventory.csv");
-
-
-        //        //player coins added by item cost
-        //        coins = coins + line.cost;
-        //    }
-        //    //if player inventory does not have item
-        //    else if (count == myInv.Length && playerSellRequest != line.name)
-        //    {
-        //        Console.WriteLine("");
-        //        Console.WriteLine("You dont own this item.");
-        //        Console.WriteLine("");
-        //    }
-        //}
     }
 }

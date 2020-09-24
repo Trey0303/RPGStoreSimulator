@@ -43,10 +43,11 @@ namespace RPGStoreSimulator
                 //reads what player inputs
                 String playerCommand = Console.ReadLine();
                 //checks to see if player command matches any command on list
-                String[] commandArray = { "quit", "inv", "show inv", "show inventory", "inventory", "store", "shop", "buy",
-                    "purchase", "sell", "inspect", "view", "add_to_shop"};
+                String[] commandArray = { "quit", "inv", "show inv", "show inventory", "inventory", "store", "shop", "go to store", 
+                    "go to shop", "buy", "purchase", "sell", "inspect", "view", "add_to_shop"};
                 //array used to convert player command into an int
-                int[] numberForm = { 0, 1, 1, 1, 1, 2, 2, 3, 3, 4, 5, 5, 6 };
+                int[] numberForm = { /*quit*/0, /*player inv*/1, 1, 1, 1, /*shop*/2, 2, 2, 2, 
+                    /*buy*/3, 3, /*sell*/4, /*inspect*/5, 5, /*add_to_shop*/6 };
 
                 int strToInt = -1;
                 for (int i = 0; i < commandArray.Length; i++)

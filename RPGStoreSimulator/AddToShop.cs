@@ -62,14 +62,16 @@ namespace RPGStoreSimulator
                         else
                         {
                             Console.WriteLine("");
-                            Console.WriteLine("Cost input invalid, need a number");
+                            Console.WriteLine("Cost input invalid, too big of a number");
+                            Console.WriteLine("or input was not a number");
                             Console.WriteLine("");
                         }
                     }
                     else
                     {
                         Console.WriteLine("");
-                        Console.WriteLine("Health input invalid, need a number");
+                        Console.WriteLine("Health input invalid, too big of a number");
+                        Console.WriteLine("or input was not a number");
                         Console.WriteLine("");
                     }
 
@@ -77,7 +79,8 @@ namespace RPGStoreSimulator
                 else
                 {
                     Console.WriteLine("");
-                    Console.WriteLine("Damage input invalid, need a number");
+                    Console.WriteLine("Damage input invalid, too big of a number ");
+                    Console.WriteLine("or input was not a number");
                     Console.WriteLine("");
                 }
             }
