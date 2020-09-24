@@ -16,17 +16,19 @@ namespace RPGStoreSimulator
             PotionType = "?";
             heal = 0;
             cost = 0;
+            damage = 0;
             
         }
 
         //if potion has paramerters
-        public Potions(string _itemType, string _type,int _potionEffect, string _name, int _cost)
+        public Potions(string _itemType, string _type, int _potionEffect, string _name, int _cost, int _damage)
         {
             itemType = _itemType;
             name = _name;
             PotionType = _type;
             heal = _potionEffect;
             cost = _cost;
+            damage = _damage;
         }
     }
 }
