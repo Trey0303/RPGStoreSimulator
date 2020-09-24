@@ -12,8 +12,10 @@ namespace RPGStoreSimulator
 {
     class Program
     {
-        //allows other classes to access myInv
+        //allows other classes to access myInv and storeInv when 'Progam.' is typed before
         public static Items[] myInv { get; internal set; }
+        public static Items[] storeInv { get; internal set; }
+
         static void Main(string[] args)
         {
             //storeInventory.LoadStoreItems();
@@ -29,8 +31,6 @@ namespace RPGStoreSimulator
             bool inShop = false;
             //to know when in player inventory
             bool playerInventory = false;
-            //know if it can be viewed
-            bool inspectedItem = false;
             //start off with a number of coins
             int coins = 100;
 
@@ -257,39 +257,11 @@ namespace RPGStoreSimulator
                         if (playerInventory)
                         {
                             //ask player what item they want to inspect
-                            Console.WriteLine("");
-                            Console.WriteLine("Which item would you like to inspect?");
-                            String viewItem = Console.ReadLine();
-                            foreach (Items myItem in myInv)
-                            {
-                                if (viewItem == myItem.name)
-                                {
-                                    Console.WriteLine("You have inspected " + myItem.name);
-                                }
-                            }
-                            if (inspectedItem == false)
-                            {
-                                Console.WriteLine("Nothing to inspect.");
-                            }
+                            Inspect.InspectPlayer();
                         }
                         else if (inShop)
                         {
-                            //ask player what item they want to inspect
-                            Console.WriteLine("");
-                            Console.WriteLine("Which item would you like to inspect?");
-                            String viewItem = Console.ReadLine();
-                            foreach (Items storeItem in storeInv)
-                            {
-                                if (viewItem == storeItem.name)
-                                {
-                                    Console.WriteLine("You have inspected " + storeItem.name);
-                                    inspectedItem = true;
-                                }
-                            }
-                            if (inspectedItem == false)
-                            {
-                                Console.WriteLine("Nothing to inspect.");
-                            }
+                            Inspect.InspectStore();
                         }
                         else
                         {

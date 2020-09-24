@@ -13,6 +13,7 @@ namespace RPGStoreSimulator
     {
         public static int Sell(int coins)
         {
+            //so that the foreach loop has something to go through
             myInv = LoadItems("Inventory.csv");
             //to know if is or isnt there
             bool isItem = false;
