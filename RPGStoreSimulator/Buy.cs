@@ -57,28 +57,35 @@ namespace RPGStoreSimulator
                             //if player does not have item in inventory
                             if (count == myInv.Length)
                             {
-                                Console.WriteLine("");
-                                Console.WriteLine("added new item to player inventory");
-                                Console.WriteLine("");
+                                if(item.cost <= coins)
+                                {
+                                    Console.WriteLine("");
+                                    Console.WriteLine("added new item to player inventory");
+                                    Console.WriteLine("");
 
-                                //add bought item
-                                StreamWriter writer;//adds to text file inventory
-                                writer = new StreamWriter("Inventory.csv", true);
-                                //puts item values in order of text file
-                                writer.WriteLine(item.itemType + "," + item.name + "," + item.damage + "," + item.heal + "," + item.cost);
-                                //stops writing in document
-                                writer.Close();
-                                //update inventory to view newly added item without have to restart game
-                                myInv = LoadItems("Inventory.csv");
-                                //player coins subtracted by item cost
-                                coins = coins - item.cost;
-                                //prevent "You already have this item." prompt
-                                count++;
-                                //prevents duplicate
-                                moreThanZero = true;
+                                    //add bought item
+                                    StreamWriter writer;//adds to text file inventory
+                                    writer = new StreamWriter("Inventory.csv", true);
+                                    //puts item values in order of text file
+                                    writer.WriteLine(item.itemType + "," + item.name + "," + item.damage + "," + item.heal + "," + item.cost);
+                                    //stops writing in document
+                                    writer.Close();
+                                    //update inventory to view newly added item without have to restart game
+                                    myInv = LoadItems("Inventory.csv");
+                                    //player coins subtracted by item cost
+                                    coins = coins - item.cost;
+                                    //prevent "You already have this item." prompt
+                                    count++;
+                                    //prevents duplicate
+                                    moreThanZero = true;
 
-                                //return coins;
-
+                                    //return coins;
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Invaild funds");
+                                    moreThanZero = true;
+                                }
                             }
                         }
                     }
@@ -112,24 +119,30 @@ namespace RPGStoreSimulator
                 {
                     if (playerBuyRequest == item.name)
                     {
-                        Console.WriteLine("");
-                        Console.WriteLine("added new item to player inventory");
-                        Console.WriteLine("");
+                        if (item.cost <= coins)
+                        {
+                            Console.WriteLine("");
+                            Console.WriteLine("added new item to player inventory");
+                            Console.WriteLine("");
 
-                        //add bought item
-                        StreamWriter writer;//adds to text file inventory
-                        writer = new StreamWriter("Inventory.csv", true);
-                        //puts item values in order of text file
-                        writer.WriteLine(item.itemType + "," + item.name + "," + item.damage + "," + item.heal + "," + item.cost);
-                        //stops writing in document
-                        writer.Close();
-                        //update inventory to view newly added item without have to restart game
-                        myInv = LoadItems("Inventory.csv");
-                        //player coins subtracted by item cost
-                        coins = coins - item.cost;
+                            //add bought item
+                            StreamWriter writer;//adds to text file inventory
+                            writer = new StreamWriter("Inventory.csv", true);
+                            //puts item values in order of text file
+                            writer.WriteLine(item.itemType + "," + item.name + "," + item.damage + "," + item.heal + "," + item.cost);
+                            //stops writing in document
+                            writer.Close();
+                            //update inventory to view newly added item without have to restart game
+                            myInv = LoadItems("Inventory.csv");
+                            //player coins subtracted by item cost
+                            coins = coins - item.cost;
 
-                        //return coins;
-
+                            //return coins;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invaild funds");
+                        }
                     }
                 }
             }
