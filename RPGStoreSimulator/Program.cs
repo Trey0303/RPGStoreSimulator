@@ -20,6 +20,7 @@ namespace RPGStoreSimulator
         {
             //storeInventory.LoadStoreItems();
             //add text file for player inventory
+            //make sure to have .csv files set to Copy always in copy to output directory to have release build work
             Items[] myInv = LoadItems("Inventory.csv");
             Items[] storeInv = LoadItems("ShopInventory.csv");
 

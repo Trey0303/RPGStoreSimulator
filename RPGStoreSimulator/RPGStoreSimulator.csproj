@@ -9,4 +9,13 @@
     <PackageReference Include="CsvHelper" Version="15.0.5" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Inventory.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="ShopInventory.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

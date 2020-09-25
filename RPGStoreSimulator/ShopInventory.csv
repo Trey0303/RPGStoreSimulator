@@ -1,9 +1,9 @@
-itemtype,weapontype,name,damage,health,cost
-p,,health potion,,10,9
-p,,medium health potion,,25,9
-p,,mana potion,,10,9
-p,,medium mana potion,,25,15
-w,m,rusty steel sword,15,,20
-w,m,frenzy,25,,35
-w,m,doomblade,35,,45
-w,m,shortsword of echoes,45,,60
+itemtype,name,damage,health,cost
+p,health_potion,,10,9
+p,medium_health_potion,,25,9
+p,mana_potion,,10,9
+p,medium_mana_potion,,25,15
+w,rusty_steel_sword,15,,20
+w,frenzy,25,,35
+w,doomblade,35,,45
+w,shortsword_of_echoes,45,,60
