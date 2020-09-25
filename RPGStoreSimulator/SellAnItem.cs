@@ -52,7 +52,7 @@ namespace RPGStoreSimulator
 
                 }
                 //if player inventory does not have item
-                else if (isItem = false && count == myInv.Length)
+                else if (isItem == false && count == myInv.Length)
                 {
                     Console.WriteLine("");
                     Console.WriteLine("You dont own this item.");

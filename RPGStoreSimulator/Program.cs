@@ -22,8 +22,6 @@ namespace RPGStoreSimulator
             //add text file for player inventory
             Items[] myInv = LoadItems("Inventory.csv");
             Items[] storeInv = LoadItems("ShopInventory.csv");
-            //string filePath = @"C:\Users\treyp\source\repos\RPGStoreSimulator\RPGStoreSimulator\Inventory.txt"; *old way
-
 
             //set Gamerunning to equal true
             bool gameRunning = true;
@@ -44,10 +42,10 @@ namespace RPGStoreSimulator
                 String playerCommand = Console.ReadLine();
                 //checks to see if player command matches any command on list
                 String[] commandArray = { "quit", "inv", "show inv", "show inventory", "inventory", "store", "shop", "go to store", 
-                    "go to shop", "buy", "purchase", "sell", "inspect", "view", "add_to_shop"};
+                    "go to shop", "buy", "purchase", "sell", "inspect", "view", "add_to_shop","remove_from_shop"};
                 //array used to convert player command into an int
                 int[] numberForm = { /*quit*/0, /*player inv*/1, 1, 1, 1, /*shop*/2, 2, 2, 2, 
-                    /*buy*/3, 3, /*sell*/4, /*inspect*/5, 5, /*add_to_shop*/6 };
+                    /*buy*/3, 3, /*sell*/4, /*inspect*/5, 5, /*add_to_shop*/6, /*remove_from_shop*/7};
 
                 int strToInt = -1;
                 for (int i = 0; i < commandArray.Length; i++)
@@ -168,6 +166,10 @@ namespace RPGStoreSimulator
                         //calls NewItem from AddToShop class
                         AddToShop.NewItem();
                         //reload store inventory
+                        storeInv = LoadItems("ShopInventory.csv");
+                        break;
+                    case 7:
+                        RemoveFromShop.Remove();
                         storeInv = LoadItems("ShopInventory.csv");
                         break;
 
